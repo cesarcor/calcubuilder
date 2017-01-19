@@ -19,3 +19,5 @@ define('CLCBUILDER_PLUGIN', __FILE__ );
 define('CLCBUILDER_PLUGIN_BASENAME', plugin_basename( CLCBUILDER_PLUGIN ) );
 define('CLCBUILDER_PLUGIN_NAME', trim( dirname( CLCBUILDER_PLUGIN_BASENAME ), '/' ) );
 define('CLCBUILDER_PLUGIN_DIR', untrailingslashit( dirname( CLCBUILDER_PLUGIN ) ));
+
+require_once CLCBUILDER_PLUGIN_DIR . '/admin/admin.php';
