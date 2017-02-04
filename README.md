@@ -1,2 +1,3 @@
 # calcubuilder
-A Wordpress plugin that helps WordPress website owners create calculators
+A Wordpress plugin to help website owners easily develop and customize
+calculators.
