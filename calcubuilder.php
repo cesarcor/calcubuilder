@@ -32,14 +32,10 @@ define('CLCBUILDER_PLUGIN_NAME', trim( dirname( CLCBUILDER_PLUGIN_BASENAME ), '/
 define('CLCBUILDER_PLUGIN_DIR', untrailingslashit( dirname( CLCBUILDER_PLUGIN ) ));
 
 
-
-
 function activate_calcubuilder() {
 	require_once CLCBUILDER_PLUGIN_DIR . '/includes/calcubuilder-activator.php';
 	Calcubuilder_Activator::activate();
 }
-
-
 
 function deactivate_calcubuilder() {
 	require_once CLCBUILDER_PLUGIN_DIR . '/includes/calcubuilder-deactivator.php';
@@ -51,10 +47,14 @@ register_deactivation_hook( __FILE__, 'deactivate_calcubuilder' );
 
 
 require_once CLCBUILDER_PLUGIN_DIR . '/includes/calcubuilder-core.php';
+require_once CLCBUILDER_PLUGIN_DIR . '/admin/calcubuilder-admin.php';
+
 
 function run_calcubuilder() {
 	$plugin = new Calcubuilder_Core();
 	$plugin->run();
 }
+
+
 
 run_calcubuilder();

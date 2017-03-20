@@ -9,16 +9,6 @@
  * @subpackage calcubuilder/admin
  */
 
-/**
- * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
- * @package    calcubuilder
- * @subpackage calcubuilder/admin
- * @author     Cesar C. Downs <cesarcdowns@gmail.com>
- */
 
 class Calcubuilder_Admin{
 
@@ -39,9 +29,10 @@ class Calcubuilder_Admin{
   }
 
   public function clcbuilder_enqueue_scripts() {
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('clcbuilder_jqueryui', plugin_dir_url( __FILE__ ) . '../assets/js/jquery-ui-1.12.1/jquery-ui.min.js', array('jquery'));
-
+    wp_deregister_script('jquery');
+    wp_enqueue_script('jquery_def', plugin_dir_url( __FILE__ ) . '../assets/js/jquery-3.1.1.min.js', false, false, true );
+    wp_enqueue_script('clcbuilder_jqueryui', plugin_dir_url( __FILE__ ) . '../assets/js/jquery-ui-1.12.1/jquery-ui.min.js', array('jquery_def'), false, true);
+    wp_enqueue_script('clcbuilder_admin_scripts', plugin_dir_url( __FILE__ ) . 'js/admin-scripts.js', array('jquery_def'), false, true);
   }
 
   public function clcbuilder_menus(){
@@ -50,18 +41,18 @@ class Calcubuilder_Admin{
          'CalcuBuilder',
          'manage_options',
          'calcubuilder',
-         'calcuBuilder_cbk',
+         'calcuBuilder_all_view',
          'dashicons-smiley',
          100
         );
 
         add_submenu_page(
           'calcubuilder',
-          'All Calculators',
+          'CalcuBuilder',
           'All Calculators',
           'manage_options',
-          'calcuBuilder_all',
-          'calcuBuilder_all'
+          'calcubuilder',
+          'calcuBuilder_all_view'
         );
 
        add_submenu_page(
@@ -70,17 +61,30 @@ class Calcubuilder_Admin{
          'Add New Calculator',
          'manage_options',
          'calcuBuilder_new',
-         'calcuBuilder_new'
+         'calcuBuilder_new_view'
+       );
+
+       add_submenu_page(
+         'calcubuilder',
+         'Settings',
+         'Settings',
+         'manage_options',
+         'calcuBuilder_settings',
+         'calcuBuilder_settings_view'
        );
   }
 
 
 }
 
-function calcuBuilder_cbk(){}
-
-function calcuBuilder_new(){
-  require 'views/new-calc.php';
+function calcuBuilder_all_view(){
+  require_once('views/all-calculators.php');
 }
 
-function calcuBuilder_all(){}
+function calcuBuilder_new_view(){
+  require_once('views/new-calculator.php');
+}
+
+function calcuBuilder_settings_view(){
+  require_once('views/settings.php');
+}

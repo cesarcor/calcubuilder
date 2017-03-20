@@ -5,3 +5,17 @@
   width:90%;
   height:500px;
 }
+
+.clcbuilder_menu{
+  display: inline;
+}
+
+.build-area{
+  display: inline;
+  width: 500px;
+  height: 500px;
+}
+
+#drag-test{
+  border: 1px solid white;
+}
